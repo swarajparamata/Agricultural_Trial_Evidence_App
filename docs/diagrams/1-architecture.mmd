@@ -1,0 +1,6 @@
+flowchart LR
+    U([Browser]) --> FE["Frontend<br/>React + Vite · :5173"]
+    FE -- "REST + SSE · JWT" --> BE["Backend API<br/>FastAPI + SQLite · :8000"]
+    BE -- "HTTP + SSE · API key" --> LLM["LLM service<br/>FastAPI + LangChain/LangGraph · :8100"]
+    LLM -- "Ollama API" --> OL["Ollama<br/>Qwen 3.6 · :11434"]
+    LLM -. "model unavailable" .-> OFF["Offline planner<br/>(same graph, rule-based)"]

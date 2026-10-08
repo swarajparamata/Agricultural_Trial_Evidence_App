@@ -1,0 +1,9 @@
+[submodule "Agricultural_Trial_Evidence_App_LLM"]
+	path = Agricultural_Trial_Evidence_App_LLM
+	url = https://github.com/swarajparamata/Agricultural_Trial_Evidence_App_LLM.git
+[submodule "Agricultural_Trial_Evidence_App_Backend"]
+	path = Agricultural_Trial_Evidence_App_Backend
+	url = https://github.com/swarajparamata/Agricultural_Trial_Evidence_App_Backend.git
+[submodule "Agricultural_Trial_Evidence_App_Frontend"]
+	path = Agricultural_Trial_Evidence_App_Frontend
+	url = https://github.com/swarajparamata/Agricultural_Trial_Evidence_App_Frontend.git

@@ -1,0 +1,8 @@
+flowchart LR
+    F[CSV and report files] --> P
+    subgraph RULES["Rules from Settings"]
+        direction LR
+        P[1 · Parse] --> N[2 · Normalize] --> R[3 · Reconcile]
+    end
+    O[Admin overrides] --> R
+    R --> T[(Reconciled trials)]

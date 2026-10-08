@@ -1,0 +1,23 @@
+sequenceDiagram
+    actor User
+    participant UI as React app
+    participant API as Backend API
+    participant AG as LLM service (LangGraph)
+    participant M as Ollama · Qwen 3.6
+    User->>UI: types a question
+    UI->>API: POST /api/assistant/chat/stream (JWT)
+    Note over API: builds the dataset (reconciled trials,<br/>vocabulary, custom fields) and the agent<br/>options from Settings → AI assistant
+    API->>AG: POST /v1/agent/stream
+    loop tool loop (bounded)
+        AG->>M: messages + tools
+        M-->>AG: tool calls
+        Note over AG: runs the tools on the dataset
+    end
+    Note over AG: verifies the draft answer<br/>(numbers, trial IDs, conflicts, gaps)
+    opt checks fail (bounded)
+        AG->>M: reviewer feedback
+        M-->>AG: revised answer
+    end
+    AG-->>API: events: step logs … answer, done
+    API-->>UI: relays the events as they happen
+    UI-->>User: answer, sources, fact-check badge, Inspection log

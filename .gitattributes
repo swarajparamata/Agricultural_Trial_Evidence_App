@@ -1,0 +1,6 @@
+# Normalise line endings: shell scripts must stay LF for macOS and Linux, Windows scripts CRLF.
+* text=auto
+*.sh text eol=lf
+*.ps1 text eol=crlf
+*.cmd text eol=crlf
+*.png binary

@@ -1,0 +1,63 @@
+erDiagram
+    source_files ||--o{ source_records : "rows or report"
+    source_records }o..o| trials : "reconciled into"
+    trial_overrides }o..o| trials : "applied on top"
+
+    users {
+        int id PK
+        string email UK
+        string hashed_password "argon2"
+        string role "admin or viewer"
+        bool is_active
+    }
+    source_files {
+        int id PK
+        string filename UK
+        string kind "csv or report"
+        string parser
+        text content "original text"
+        json warnings
+    }
+    source_records {
+        int id PK
+        int file_id FK "NULL for manual entries"
+        string trial_id
+        string kind "csv, report or manual"
+        json fields "values as written"
+        json units
+        text notes
+        string extraction "rules, llm or manual"
+    }
+    trials {
+        string id PK
+        string crop
+        string product
+        string country
+        int year
+        string trial_type
+        float treatment_kg_ha
+        float control_kg_ha
+        string status
+        json conflicts
+        json uplift_range
+        json sources
+        json custom_fields
+    }
+    trial_overrides {
+        string trial_id PK
+        string field PK
+        json value
+        text note
+        string updated_by
+    }
+    app_settings {
+        string key PK "settings section"
+        json value
+    }
+    audit_events {
+        int id PK
+        datetime at
+        string actor
+        string action
+        string target
+    }
